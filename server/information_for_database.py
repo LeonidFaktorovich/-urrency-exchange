@@ -35,56 +35,56 @@ def create_tables():
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table sber_550 ("
+    ibm_db.exec_immediate(conn, "create table sber_550 ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table sber_1500 ("
+    ibm_db.exec_immediate(conn, "create table sber_1500 ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table sber_15000 ("
+    ibm_db.exec_immediate(conn, "create table sber_15000 ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table raifa ("
+    ibm_db.exec_immediate(conn, "create table raifa ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table alpha ("
+    ibm_db.exec_immediate(conn, "create table alpha ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table tinkoff ("
+    ibm_db.exec_immediate(conn, "create table tinkoff ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table vtb_1 ("
+    ibm_db.exec_immediate(conn, "create table vtb_1 ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
                                 "buy_dollar decimal(4,2) not null,"
                                 "sell_euro decimal(4,2) not null,"
                                 "buy_euro decimal(4,2) not null);")
-    ibm_db.exec_immeadite(conn, "create table vtb_30000 ("
+    ibm_db.exec_immediate(conn, "create table vtb_30000 ("
                                 "data_day varchar(10) not null,"
                                 "data_hours decimal(2,0) not null,"
                                 "sell_dollar decimal(4,2) not null,"
@@ -111,6 +111,7 @@ def information_raif():
     euro_buy = values[13].text.strip()[:-2].replace(',', '.')
     data_day, data_time = str(datetime.datetime.now()).split()
     data_time = int(data_time[:2])
+    data_day = data_day.replace('-', '')
     ibm_db.exec_immediate(conn, f"INSERT INTO RAIFA VALUES ({data_day}, {data_time}, {float(dollar_sell)}, "
                                 f"{float(dollar_buy)}, {float(euro_sell)}, {float(euro_buy)});")
 
@@ -135,6 +136,7 @@ def information_tinkoff():
     driver.close()
     data_day, data_time = str(datetime.datetime.now()).split()
     data_time = int(data_time[:2])
+    data_day = data_day.replace('-', '')
     ibm_db.exec_immediate(conn, f"INSERT INTO TINKOFF VALUES ({data_day}, {data_time}, {float(dollar_sell)}, "
                                 f"{float(dollar_buy)}, {float(euro_sell)}, {float(euro_buy)});")
 
@@ -159,6 +161,7 @@ def information_alpha():
     driver.close()
     data_day, data_time = str(datetime.datetime.now()).split()
     data_time = int(data_time[:2])
+    data_day = data_day.replace('-', '')
     ibm_db.exec_immediate(conn, f"INSERT INTO ALPHA VALUES ({data_day}, {data_time}, {float(dollar_sell)}, "
                                 f"{float(dollar_buy)}, {float(euro_sell)}, {float(euro_buy)});")
 
@@ -203,6 +206,7 @@ def information_vtb():
     driver.close()
     data_day, data_time = str(datetime.datetime.now()).split()
     data_time = int(data_time[:2])
+    data_day = data_day.replace('-', '')
     ibm_db.exec_immediate(conn, f"INSERT INTO VTB_1 VALUES ({data_day}, {data_time}, {float(dollar_1_sell)}, "
                                 f"{float(dollar_1_buy)}, {float(euro_1_sell)}, {float(euro_1_buy)});")
     ibm_db.exec_immediate(conn, f"INSERT INTO VTB_30000 VALUES ({data_day}, {data_time}, {float(dollar_30000_sell)}, "
@@ -265,6 +269,7 @@ def information_sber():
     driver.close()
     data_day, data_time = str(datetime.datetime.now()).split()
     data_time = int(data_time[:2])
+    data_day = data_day.replace('-', '')
     ibm_db.exec_immediate(conn, f"INSERT INTO SBER_1 VALUES ({data_day}, {data_time}, {float(dollar_1_sell)}, "
                                 f"{float(dollar_1_buy)}, {float(euro_1_sell)}, {float(euro_1_buy)});")
     ibm_db.exec_immediate(conn, f"INSERT INTO SBER_550 VALUES ({data_day}, {data_time}, {float(dollar_550_sell)}, "
@@ -273,6 +278,7 @@ def information_sber():
                                 f"{float(dollar_1500_buy)}, {float(euro_1500_sell)}, {float(euro_1500_buy)});")
     ibm_db.exec_immediate(conn, f"INSERT INTO SBER_15000 VALUES ({data_day}, {data_time}, {float(dollar_15000_sell)}, "
                                 f"{float(dollar_15000_buy)}, {float(euro_15000_sell)}, {float(euro_15000_buy)});")
+
 
 create_tables()
 while True:
