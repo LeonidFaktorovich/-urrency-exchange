@@ -274,7 +274,7 @@ def information_sber():
     ibm_db.exec_immediate(conn, f"INSERT INTO SBER_15000 VALUES ({data_day}, {data_time}, {float(dollar_15000_sell)}, "
                                 f"{float(dollar_15000_buy)}, {float(euro_15000_sell)}, {float(euro_15000_buy)});")
 
-
+create_tables()
 while True:
     if int(str(datetime.datetime.now()).split()[1][3:5]) <= 1:
         information_vtb()
